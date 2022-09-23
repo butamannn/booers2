@@ -1,0 +1,44 @@
+<div>
+  <div class="container">
+      <h2>User info</h2>
+
+      <% if flash[:notice] %>
+        <p id="notice">
+          <%= flash[:notice] %>
+        </p>
+      <% end %>
+
+
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= @user.errors.count %> prohibited this product from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+
+      <%= form_with model:@user do |f| %>
+        <div class="field row">
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field row">
+          <%= f.label :image %>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+        </div>
+        <div class="field row">
+          <%= f.label :introduction %>
+          <%= f.text_area :introduction %>
+        </div>
+        <div class="actions row">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+
+  </div>
+</div>
